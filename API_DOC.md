@@ -46,7 +46,7 @@
 - `GET /api/users/{userId}/tasks` — List all tasks for user
 - `GET /api/users/{userId}/tasks?completed=true|false` — Filter tasks by completion
 - `GET /api/users/{userId}/tasks/{taskId}` — Get a specific task
-- `PUT /api/users/{userId}/tasks/{taskId}` — Update a task
+- `PUT /api/users/{userId}/tasks/{taskId}` — Update a task (Title is a required field)
   - Request body: `{ "title": "string", "description": "string", "dueDate": "YYYY-MM-DD", "completed": true|false }`
 - `DELETE /api/users/{userId}/tasks/{taskId}` — Delete a task
 
