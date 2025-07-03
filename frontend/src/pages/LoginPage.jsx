@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import AuthForm from '../components/AuthForm';
-import api from '../services/api';
+import { login } from '../services/api';
 import { jwtDecode } from 'jwt-decode';
 
 const LoginPage = () => {
@@ -13,13 +13,14 @@ const LoginPage = () => {
     setIsLoading(true);
     setError('');
     try {
-      const response = await api.login(credentials);
+      const response = await login(credentials);
       const { token } = response.data;
       localStorage.setItem('token', token);
       // In a real app, you'd likely have a global state/context for the user
       navigate('/');
     } catch (err) {
-      setError('Login failed. Please check your username and password.');
+      const message = err.response?.data?.message || 'Login failed. Please check your username and password.';
+      setError(message);
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -36,4 +37,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-

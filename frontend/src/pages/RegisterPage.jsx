@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import AuthForm from '../components/AuthForm';
-import api from '../services/api';
+import { register } from '../services/api';
 
 const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,10 +12,11 @@ const RegisterPage = () => {
     setIsLoading(true);
     setError('');
     try {
-      await api.register(credentials);
+      await register(credentials);
       navigate('/login'); // Redirect to login page after successful registration
     } catch (err) {
-      setError('Registration failed. Please try again.');
+      const message = err.response?.data?.message || 'Registration failed. Please try again.';
+      setError(message);
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -32,4 +33,3 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
-
