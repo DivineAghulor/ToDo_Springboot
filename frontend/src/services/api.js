@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'https://27af-105-113-64-120.ngrok-free.app/api', // Adjust if your backend URL is different
+  baseURL: 'http://localhost:8080/api', // Adjust if your backend URL is different
 });
 
 apiClient.interceptors.request.use(config => {
